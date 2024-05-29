@@ -53,10 +53,12 @@ class DashboardController extends Controller
             $id_user = $request->session()->get('id_user');
             
             $perbaikan = DB::table('perbaikan')
-                ->select('id_perbaikan', 'nama_mobil', 'plat_mobil', 'tentang_kerusakan', 'status')
+                ->select('id_perbaikan', 'nama_mobil', 'no_whatsapp', 'plat_mobil', 'tentang_kerusakan', 'status')
                 ->where('id_user', $id_user)
                 ->first();
             
+            $no_whatsapp = '';
+            $id_perbaikan = '';
             $nama_mobil = '';
             $plat_mobil = '';
             $tentang_kerusakan = '';
@@ -68,11 +70,12 @@ class DashboardController extends Controller
                 $nama_mobil = $perbaikan->nama_mobil;
                 $plat_mobil = isset($perbaikan->plat_mobil) ? $perbaikan->plat_mobil : '';
                 $tentang_kerusakan = $perbaikan->tentang_kerusakan;
+                $no_whatsapp = $perbaikan->no_whatsapp;
                 $status = $perbaikan->status;
                 $readonly = 'readonly';
             }
             
-            $allReadOnly = !empty($nama_mobil) && !empty($plat_mobil) && !empty($tentang_kerusakan);
+            $allReadOnly = !empty($nama_mobil) && !empty($plat_mobil) && !empty($tentang_kerusakan) && !empty($no_whatsapp);
             
             return view('user_dashboard', [
                 'title' => 'Dashboard',
@@ -84,9 +87,11 @@ class DashboardController extends Controller
                 'nama_belakang' => $request->session()->get('nama_belakang'),
                 'nama_mobil' => $nama_mobil,
                 'plat_mobil' => $plat_mobil,
+                'no_whatsapp' => $no_whatsapp,
                 'tentang_kerusakan' => $tentang_kerusakan,
                 'readonly' => $readonly,
                 'status' => $status,
+                'no_whatsapp' => $no_whatsapp,
                 'allReadOnly' => $allReadOnly,
             ]);
         }

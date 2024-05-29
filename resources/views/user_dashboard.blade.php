@@ -17,15 +17,21 @@
                                     <input type="hidden" class="form-control" name="id_user"
                                         value="{{ $id_user }}" readonly>
                                 </div>
-                                <div class="col-lg-6 mt-2">
+                                <div class="col-lg-4 mt-2">
                                     <label for="nama_mobil">Nama Mobil :</label>
                                     <input type="text" class="form-control" name="nama_mobil"
                                         value="{{ $nama_mobil }}" {{ $readonly }}>
                                 </div>
-                                <div class="col-lg-6 mt-2">
+                                <div class="col-lg-4 mt-2">
                                     <label for="plat_mobil">Plat Mobil :</label>
                                     <input type="text" class="form-control" name="plat_mobil"
                                         value="{{ $plat_mobil }}" {{ $readonly }}>
+                                </div>
+                                <div class="col-lg-4 mt-2">
+                                    <label for="no_whatsapp">No Whatsapp :</label>
+                                    <input type="text" class="form-control" name="no_whatsapp"
+                                        value="{{ $no_whatsapp }}" {{ $readonly }}>
+                                        <small>No Whatsapp Harus diawali dengan 62</small>
                                 </div>
                                 <div class="col-lg-12 mt-2">
                                     <label for="tentang_kerusakan">Kerusakan :</label>

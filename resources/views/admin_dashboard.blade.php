@@ -123,75 +123,48 @@
                                                     </div>
                                                     <div class="modal-body">
                                                         <div class="card container-fluid">
-                                                            <form
-                                                                action="{{ route('update.perbaikan', $p->id_perbaikan) }}"
-                                                                method="post">
+                                                            <form action="{{ route('update.perbaikan', $p->id_perbaikan) }}" method="post" id="form_perbaikan_{{ $p->id_perbaikan }}">
                                                                 @csrf
                                                                 @method('PUT')
                                                                 <div class="card-body">
                                                                     <div class="row mt-3">
                                                                         <div class="col-lg-12">
                                                                             <label for="id_user">Nama Pemilik :</label>
-                                                                            <input type="text" class="form-control"
-                                                                                name="nama_pemilik"
-                                                                                value="{{ ucfirst($p->users->nama_depan . ' ' . $p->users->nama_belakang) }}"
-                                                                                readonly>
-                                                                            <input type="hidden" class="form-control"
-                                                                                name="id_user"
-                                                                                value="{{ $p->id_user }}" readonly>
+                                                                            <input type="text" class="form-control" name="nama_pemilik" value="{{ ucfirst($p->users->nama_depan . ' ' . $p->users->nama_belakang) }}" readonly>
+                                                                            <input type="hidden" class="form-control" name="id_user" value="{{ $p->id_user }}" readonly>
                                                                         </div>
                                                                         <div class="col-lg-6 mt-2">
                                                                             <label for="nama_mobil">Nama Mobil :</label>
-                                                                            <input type="text" class="form-control"
-                                                                                name="nama_mobil"
-                                                                                value="{{ $p->nama_mobil }}" readonly>
+                                                                            <input type="text" class="form-control" name="nama_mobil" value="{{ $p->nama_mobil }}" readonly>
                                                                         </div>
                                                                         <div class="col-lg-6 mt-2">
                                                                             <label for="plat_mobil">Plat Mobil :</label>
-                                                                            <input type="text" class="form-control"
-                                                                                name="plat_mobil"
-                                                                                value="{{ $p->plat_mobil }}" readonly>
+                                                                            <input type="text" class="form-control" name="plat_mobil" value="{{ $p->plat_mobil }}" readonly>
                                                                         </div>
                                                                         <div class="col-lg-12 mt-2">
-                                                                            <label for="tentang_kerusakan">Kerusakan
-                                                                                :</label>
+                                                                            <label for="tentang_kerusakan">Kerusakan :</label>
                                                                             <textarea class="form-control" name="tentang_kerusakan" id="tentang_kerusakan" rows="4">{{ $p->tentang_kerusakan }}</textarea>
                                                                         </div>
                                                                         <div class="col-lg-6 mt-2">
-                                                                            <label for="tanggal_mulai">Tanggal Mulai
-                                                                                :</label>
-                                                                            <input type="date" name="tanggal_mulai"
-                                                                                class="form-control"
-                                                                                id="tanggal_mulai"
-                                                                                value="{{ date('Y-m-d') }}" readonly>
+                                                                            <label for="tanggal_mulai">Tanggal Mulai :</label>
+                                                                            <input type="date" name="tanggal_mulai" class="form-control" id="tanggal_mulai" value="{{ date('Y-m-d') }}" readonly>
                                                                         </div>
                                                                         <div class="col-lg-6 mt-2">
-                                                                            <label for="tanggal_selesai">Tanggal
-                                                                                Selesai :</label>
-                                                                            <input type="date"
-                                                                                name="tanggal_selesai"
-                                                                                class="form-control"
-                                                                                id="tanggal_mulai"
-                                                                                value="{{ date('Y-m-d', strtotime($p->tanggal_selesai)) }}">
+                                                                            <label for="tanggal_selesai">Tanggal Selesai :</label>
+                                                                            <input type="date" name="tanggal_selesai" class="form-control" id="tanggal_selesai" value="{{ date('Y-m-d', strtotime($p->tanggal_selesai)) }}">
                                                                         </div>
                                                                     </div>
                                                                     <hr>
                                                                     <div class="row">
                                                                         <div class="col-lg-6">
-                                                                            <label for="id_mekanik">Nama
-                                                                                Mekanik:</label>
-                                                                            <select name="id_mekanik"
-                                                                                class="form-control">
-                                                                                <option value="">--- Pilih
-                                                                                    Mekanik ---</option>
+                                                                            <label for="id_mekanik">Nama Mekanik:</label>
+                                                                            <select name="id_mekanik" class="form-control">
+                                                                                <option value="">--- Pilih Mekanik ---</option>
                                                                                 @if ($mekanik->isEmpty())
-                                                                                    <option value="" disabled>
-                                                                                        Tidak ada data mekanik</option>
+                                                                                    <option value="" disabled>Tidak ada data mekanik</option>
                                                                                 @else
-                                                                                    @foreach ($mekanik as $key => $m)
-                                                                                        <option
-                                                                                            value="{{ $m->id_mekanik }}"
-                                                                                            {{ $p->id_mekanik == $p->id_mekanik ? 'selected' : '' }}>
+                                                                                    @foreach ($mekanik as $m)
+                                                                                        <option value="{{ $m->id_mekanik }}" {{ $p->id_mekanik == $m->id_mekanik ? 'selected' : '' }}>
                                                                                             {{ $m->nama_mekanik }}
                                                                                         </option>
                                                                                     @endforeach
@@ -200,19 +173,11 @@
                                                                         </div>
                                                                         <div class="col-lg-6">
                                                                             <label for="status">Status</label>
-                                                                            <select name="status"
-                                                                                class="form-control" id="status">
-                                                                                <option value="">--- Pilih Status
-                                                                                    ---</option>
-                                                                                <option value="belum diproses"
-                                                                                    {{ $p->status == 'belum diproses' ? 'selected' : '' }}>
-                                                                                    Belum diproses</option>
-                                                                                <option value="sudah diproses"
-                                                                                    {{ $p->status == 'sudah diproses' ? 'selected' : '' }}>
-                                                                                    Sudah diproses</option>
-                                                                                <option value="sudah selesai"
-                                                                                    {{ $p->status == 'sudah selesai' ? 'selected' : '' }}>
-                                                                                    Sudah Selesai</option>
+                                                                            <select name="status" class="form-control" id="status">
+                                                                                <option value="">--- Pilih Status ---</option>
+                                                                                <option value="belum diproses" {{ $p->status == 'belum diproses' ? 'selected' : '' }}>Belum diproses</option>
+                                                                                <option value="sudah diproses" {{ $p->status == 'sudah diproses' ? 'selected' : '' }}>Sudah diproses</option>
+                                                                                <option value="sudah selesai" {{ $p->status == 'sudah selesai' ? 'selected' : '' }}>Sudah Selesai</option>
                                                                             </select>
                                                                         </div>
                                                                     </div>
@@ -224,7 +189,14 @@
                                                                                 <div class="checkbox-group">
                                                                                     @foreach ($items as $item)
                                                                                         <div class="form-check">
-                                                                                            <input type="checkbox" class="form-check-input" id="item_{{ $item->id_item }}" name="id_item[]" value="{{ $item->id_item }}" data-harga="{{ $item->harga }}" {{ in_array($item->id_item, $selected_id_items) ? 'checked' : '' }}>
+                                                                                            <input type="checkbox"
+                                                                                                   class="form-check-input"
+                                                                                                   id="item_{{ $item->id_item }}"
+                                                                                                   name="id_item[]"
+                                                                                                   value="{{ $item->id_item }}"
+                                                                                                   data-harga="{{ $item->harga }}"
+                                                                                                   {{ in_array($item->id_item, $selected_id_items) ? 'checked' : '' }}
+                                                                                                   onchange="calculateTotal('{{ $p->id_perbaikan }}')">
                                                                                             <label class="form-check-label" for="item_{{ $item->id_item }}">{{ $item->nama_item }}</label>
                                                                                         </div>
                                                                                     @endforeach
@@ -240,7 +212,14 @@
                                                                                 <div class="checkbox-group">
                                                                                     @foreach ($jasas as $jasa)
                                                                                         <div class="form-check">
-                                                                                            <input type="checkbox" class="form-check-input" id="jasa_{{ $jasa->id_jasa }}" name="id_jasa[]" value="{{ $jasa->id_jasa }}" data-harga="{{ $jasa->harga }}" {{ in_array($jasa->id_jasa, $selected_id_jasas) ? 'checked' : '' }}>
+                                                                                            <input type="checkbox"
+                                                                                                   class="form-check-input"
+                                                                                                   id="jasa_{{ $jasa->id_jasa }}"
+                                                                                                   name="id_jasa[]"
+                                                                                                   value="{{ $jasa->id_jasa }}"
+                                                                                                   data-harga="{{ $jasa->harga }}"
+                                                                                                   {{ in_array($jasa->id_jasa, $selected_id_jasas) ? 'checked' : '' }}
+                                                                                                   onchange="calculateTotal('{{ $p->id_perbaikan }}')">
                                                                                             <label class="form-check-label" for="jasa_{{ $jasa->id_jasa }}">{{ $jasa->nama_jasa }}</label>
                                                                                         </div>
                                                                                     @endforeach
@@ -251,25 +230,19 @@
                                                                             </div>
                                                                         </div>
                                                                     </div>
-
                                                                     <hr>
                                                                     <div class="col-lg-12">
                                                                         <label for="harga">Harga :</label>
-                                                                        <input type="text" name="harga"
-                                                                            id="harga" class="form-control"
-                                                                            value="{{ $p->harga_total }}" readonly>
+                                                                        <input type="text" name="harga" id="harga_{{ $p->id_perbaikan }}" class="form-control" value="{{ $p->harga_total }}" readonly>
                                                                     </div>
                                                                     <div class="card-footer">
                                                                         <div class="d-flex justify-content-end">
-                                                                            <button class="btn btn-warning mr-3"
-                                                                                id="total_harga" type="button"
-                                                                                onclick="calculateTotal()"><i
-                                                                                    class="fas fa-search"></i> Hitung
-                                                                                Total</button>
-                                                                            <button type="submit"
-                                                                                class="btn btn-primary"><i
-                                                                                    class="fas fa-save"></i>
-                                                                                Simpan</button>
+                                                                            <button class="btn btn-warning mr-3" id="total_harga" type="button" onclick="calculateTotal('{{ $p->id_perbaikan }}')">
+                                                                                <i class="fas fa-search"></i> Hitung Total
+                                                                            </button>
+                                                                            <button type="submit" class="btn btn-primary">
+                                                                                <i class="fas fa-save"></i> Simpan
+                                                                            </button>
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -318,6 +291,10 @@
                                                 </div>
                                             </div>
                                         </div>
+
+                                        <button class="btn btn-primary" onclick="confirmSend('{{ $p->no_whatsapp }}', '{{ $p->users->nama_depan }}', '{{ $p->users->nama_belakang }}')">
+                                            <i class="fas fa-phone"></i> Pesan
+                                        </button>
                                     </td>
                                 </tr>
                             @endforeach
@@ -331,20 +308,23 @@
 
 @include('layouts.admin_footer')
 <script>
-    function calculateTotal() {
+    function calculateTotal(id_perbaikan) {
         var total = 0;
+        var form = document.getElementById('form_perbaikan_' + id_perbaikan);
+
         // Calculate total for items
-        $('input[name="id_item[]"]:checked').each(function() {
-            total += parseFloat($(this).data('harga'));
+        form.querySelectorAll('input[name="id_item[]"]:checked').forEach(function(checkbox) {
+            total += parseFloat(checkbox.dataset.harga);
         });
+
         // Calculate total for jasa
-        $('input[name="id_jasa[]"]:checked').each(function() {
-            total += parseFloat($(this).data('harga'));
+        form.querySelectorAll('input[name="id_jasa[]"]:checked').forEach(function(checkbox) {
+            total += parseFloat(checkbox.dataset.harga);
         });
 
         // Format the total as Rupiah
         var formattedTotal = formatRupiah(total.toFixed(0), 'Rp ');
-        $('#harga').val(formattedTotal);
+        document.getElementById('harga_' + id_perbaikan).value = formattedTotal;
     }
 
     function formatRupiah(angka, prefix) {
@@ -355,10 +335,47 @@
             ribuan = split[0].substr(sisa).match(/\d{3}/gi);
 
         if (ribuan) {
-            separator = sisa ? '.' : '';
+            var separator = sisa ? '.' : '';
             rupiah += separator + ribuan.join('.');
         }
 
         return prefix == undefined ? rupiah : (rupiah ? prefix + rupiah : '');
+    }
+
+    // Initial calculation
+    document.addEventListener('DOMContentLoaded', function() {
+        @foreach($perbaikan as $p)
+            calculateTotal('{{ $p->id_perbaikan }}');
+        @endforeach
+    });
+</script>
+
+<script>
+    function confirmSend(no_whatsapp, nama_depan, nama_belakang) {
+        Swal.fire({
+            title: `Apakah Anda yakin ingin mengirim pesan WhatsApp kepada ${nama_depan} ${nama_belakang}?`,
+            input: 'text',
+            inputPlaceholder: 'Masukkan pesan Anda',
+            inputAttributes: {
+                autocapitalize: 'off'
+            },
+            showCancelButton: true,
+            confirmButtonText: 'Kirim',
+            cancelButtonText: 'Batal',
+            showLoaderOnConfirm: true,
+            preConfirm: (pesan) => {
+                const encodedPesan = encodeURI(pesan);
+                const url = `https://wa.me/${no_whatsapp}?text=${encodedPesan}`;
+                window.location.href = url;
+            }
+        }).then((result) => {
+            if (result.isConfirmed) {
+                Swal.fire(
+                    'Berhasil!',
+                    'Pesan WhatsApp telah terkirim.',
+                    'success'
+                )
+            }
+        });
     }
 </script>

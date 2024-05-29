@@ -17,6 +17,7 @@ return new class extends Migration
             $table->foreign('id_user')->references('id_user')->on('users')->onDelete('cascade');
             $table->string('nama_mobil');
             $table->string('plat_mobil');
+            $table->string('no_whatsapp');
             $table->string('tentang_kerusakan');
             $table->unsignedBigInteger('id_mekanik')->nullable();
             $table->foreign('id_mekanik')->references('id_mekanik')->on('mekanik')->onDelete('cascade');

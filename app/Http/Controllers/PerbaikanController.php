@@ -37,6 +37,7 @@ class PerbaikanController extends Controller
             'id_user' => 'required|integer',
             'nama_mobil' => 'required|string',
             'plat_mobil' => 'required|string',
+            'no_whatsapp' => 'required|regex:/^62[0-9]+$/',
             'tentang_kerusakan' => 'required|string',
             'tanggal_mulai' => 'required|date',
         ]);
@@ -79,7 +80,7 @@ class PerbaikanController extends Controller
             }
         }
         
-        $query = "SELECT id_perbaikan, nama_mobil, plat_mobil, tentang_kerusakan, status, harga_total, id_mekanik, tanggal_mulai, tanggal_selesai FROM perbaikan WHERE id_user = ?";
+        $query = "SELECT id_perbaikan, nama_mobil, plat_mobil, tentang_kerusakan, status, harga_total, id_mekanik, tanggal_mulai, tanggal_selesai, no_whatsapp FROM perbaikan WHERE id_user = ?";
         $rowData = DB::selectOne($query, [$id_user]);
         
         $nama_mobil = '';
@@ -92,6 +93,7 @@ class PerbaikanController extends Controller
             $nama_mobil = $rowData->nama_mobil;
             $plat_mobil = $rowData->plat_mobil;
             $tentang_kerusakan = $rowData->tentang_kerusakan;
+            $no_whatsapp = $rowData->no_whatsapp;
             $status = $rowData->status;
             $harga_total = $rowData->harga_total;
             $id_mekanik = $rowData->id_mekanik;
@@ -100,7 +102,7 @@ class PerbaikanController extends Controller
             $readonly = 'readonly';
         }
         
-        return view('nota', compact('name', 'email', 'nama_mobil', 'harga_total', 'tanggal_mulai', 'tanggal_selesai'));
+        return view('nota', compact('name', 'email', 'nama_mobil', 'no_whatsapp', 'harga_total', 'tanggal_mulai', 'tanggal_selesai'));
     }
 
 
