@@ -10,6 +10,7 @@
                         <tr class="text-center">
                             <th>No</th>
                             <th>Nama Mekanik</th>
+                            <th>Kehadiran</th>
                             <th>Opsi</th>
                         </tr>
                     </thead>
@@ -23,6 +24,7 @@
                                 <tr class="text-center">
                                     <td>{{ $key + 1 }}</td>
                                     <td>{{ $m->nama_mekanik }}</td>
+                                    <td>{{ $m->kehadiran }}</td>
                                     <td>
                                         <button type="button" class="btn btn-warning" data-toggle="modal"
                                             data-target="#modalPenduduk-{{ $m->id_mekanik }}"><i class="fas fa-pen"></i>
@@ -58,6 +60,12 @@
                                                                                 {{ $message }}
                                                                             </div>
                                                                             @enderror
+                                                                            <label for="kehadiran">Kehadiran</label>
+                                                                            <select name="kehadiran" id="kehadiran" class="form-control">
+                                                                                <option value="">--- Pilih Status Kehadiran ---</option>
+                                                                                <option value="hadir" {{ $m->kehadiran == 'kerja' ? 'selected' : '' }}>Kerja</option>
+                                                                                <option value="cuti" {{ $m->kehadiran == 'cuti' ? 'selected' : '' }}>Cuti</option>
+                                                                            </select>                                                                            
                                                                         </div>
                                                                     </div>
                                                                 </div>

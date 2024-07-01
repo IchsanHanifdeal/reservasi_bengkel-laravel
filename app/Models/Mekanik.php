@@ -10,5 +10,5 @@ class Mekanik extends Model
     use HasFactory;
     protected $table = 'mekanik';
     protected $primaryKey = 'id_mekanik';
-    protected $fillable = ['nama_mekanik'];
+    protected $fillable = ['nama_mekanik', 'kehadiran'];
 }

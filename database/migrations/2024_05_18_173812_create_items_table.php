@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('item', function (Blueprint $table) {
             $table->id('id_item');
             $table->string('nama_item')->unique();
+            $table->string('stok');
             $table->string('harga');
             $table->timestamps();
         });

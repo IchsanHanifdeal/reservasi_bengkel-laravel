@@ -133,17 +133,4 @@ class DashboardController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Request $request, $id_perbaikan)
-    {
-        $perbaikan = Perbaikan::find($id_perbaikan);
-
-        if ($perbaikan) {
-            $perbaikan->delete();
-            toastr()->success('data Perbaikan terhapus!', 'success');
-        } else {
-            toastr()->error('data perbaikan tidak ditemukan!', 'error');
-        }
-
-        return redirect()->back();
-    }
 }

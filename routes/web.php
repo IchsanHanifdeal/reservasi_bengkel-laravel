@@ -31,7 +31,7 @@ Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard
 Route::get('/dashboard/cetaknota/{id_perbaikan}', [PerbaikanController::class, 'show'])->name('cetaknota');
 Route::post('/dashboard/perbaikan', [PerbaikanController::class, 'store'])->name('store.perbaikan');
 Route::put('/dashboard/perbaikan/{id_perbaikan}', [PerbaikanController::class, 'update'])->name('update.perbaikan');
-Route::delete('/dashboard/perbaikan/detele/{id_perbaikan}', [PerbaikanController::class, 'destroy'])->name('destroy.perbaikan');
+Route::delete('/dashboard/perbaikan/delete/{id_perbaikan}', [PerbaikanController::class, 'destroy'])->name('destroy.perbaikan');
 
 Route::get('/dashboard/item', [ItemController::class, 'index'])->name('item');
 Route::post('/dashboard/item', [ItemController::class, 'store'])->name('store.item');

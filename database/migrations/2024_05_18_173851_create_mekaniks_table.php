@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('mekanik', function (Blueprint $table) {
             $table->id('id_mekanik');
             $table->string('nama_mekanik')->unique();
+            $table->enum('kehadiran', ['kerja', 'cuti'])->default('kerja');
             $table->timestamps();
         });
     }

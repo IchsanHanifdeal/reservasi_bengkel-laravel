@@ -86,6 +86,7 @@ class MekanikController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'nama_mekanik' => 'required|unique:mekanik,nama_mekanik,' . $id_mekanik . ',id_mekanik',
+            'kehadiran' => 'required',
         ], [
             'nama_mekanik.unique' => 'Nama Mekanik sudah terdaftar, silahkan daftarkan mekanik lain'
         ]);
@@ -103,6 +104,7 @@ class MekanikController extends Controller
         try {
             $mekanik->update([
                 'nama_mekanik' => $request->nama_mekanik,
+                'kehadiran' => $request->kehadiran,
             ]);
             toastr()->success('Pendaftaran Mekanik Berhasil!');
             return redirect()->route('mekanik');

@@ -15,16 +15,19 @@ class ItemSeeder extends Seeder
     {
         Item::create([
             'nama_item' => 'Oli',
+            'stok' => '3',
             'harga' => '35000',
         ]);
 
         Item::create([
             'nama_item' => 'Kampas Rem',
+            'stok' => '5',
             'harga' => '35000',
         ]);
 
         Item::create([
             'nama_item' => 'Bosh',
+            'stok' => '35',
             'harga' => '35000',
         ]);
     }
